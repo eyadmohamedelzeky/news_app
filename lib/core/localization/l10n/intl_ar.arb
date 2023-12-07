@@ -9,5 +9,7 @@
     "sign_up":"تسجيل",
     "register":"سجل ",
     "app_bar_title_part_one":"الاخبار ",
-    "app_bar_title_part_two":"السحابه"
+    "app_bar_title_part_two":"السحابه",
+    "email_empty":"ادخل بريدك الاكترونى ",
+    "password_empty":"ادخل كلمة المرور "
 }

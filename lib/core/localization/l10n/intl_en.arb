@@ -9,5 +9,7 @@
     "sign_up":"Sign Up",
     "register":"Register",
     "app_bar_title_part_one":"News ",
-    "app_bar_title_part_two":"Cloud"
+    "app_bar_title_part_two":"Cloud",
+    "email_empty":"Please Enter A Valid Email",
+    "password_empty":"Please Enter A Valid Password"
 }
