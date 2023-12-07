@@ -13,12 +13,8 @@ import 'package:lottie/lottie.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/logo.png
-  AssetGenImage get logo => const AssetGenImage(
-      'assets/images/logo.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  $AssetsImagesPngGen get png =>
+      const $AssetsImagesPngGen();
 }
 
 class $AssetsLottieGen {
@@ -29,8 +25,44 @@ class $AssetsLottieGen {
       const LottieGenImage(
           'assets/lottie/loading.json');
 
+  /// File path: assets/lottie/lottie logo.json
+  LottieGenImage get lottieLogo =>
+      const LottieGenImage(
+          'assets/lottie/lottie logo.json');
+
+  /// File path: assets/lottie/scuess login.json
+  LottieGenImage get scuessLogin =>
+      const LottieGenImage(
+          'assets/lottie/scuess login.json');
+
   /// List of all assets
-  List<LottieGenImage> get values => [loading];
+  List<LottieGenImage> get values =>
+      [loading, lottieLogo, scuessLogin];
+}
+
+class $AssetsImagesPngGen {
+  const $AssetsImagesPngGen();
+
+  /// File path: assets/images/png/Register1.png
+  AssetGenImage get register1 =>
+      const AssetGenImage(
+          'assets/images/png/Register1.png');
+
+  /// File path: assets/images/png/llogin.png
+  AssetGenImage get llogin => const AssetGenImage(
+      'assets/images/png/llogin.png');
+
+  /// File path: assets/images/png/login.png
+  AssetGenImage get login => const AssetGenImage(
+      'assets/images/png/login.png');
+
+  /// File path: assets/images/png/logo.png
+  AssetGenImage get logo => const AssetGenImage(
+      'assets/images/png/logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [register1, llogin, login, logo];
 }
 
 class MyAssets {
