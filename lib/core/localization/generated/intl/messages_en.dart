@@ -27,11 +27,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "donnot_have_an_account":
             MessageLookupByLibrary.simpleMessage("Don\'t Have An Account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "email_empty":
+            MessageLookupByLibrary.simpleMessage("Please Enter A Valid Email"),
         "hint_email": MessageLookupByLibrary.simpleMessage("Type Your Email"),
         "hint_password":
             MessageLookupByLibrary.simpleMessage("Enter Your Password"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "password_empty": MessageLookupByLibrary.simpleMessage(
+            "Please Enter A Valid Password"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign Up")
       };

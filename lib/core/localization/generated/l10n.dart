@@ -149,6 +149,26 @@ class AppLocalization {
       args: [],
     );
   }
+
+  /// `Please Enter A Valid Email`
+  String get email_empty {
+    return Intl.message(
+      'Please Enter A Valid Email',
+      name: 'email_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter A Valid Password`
+  String get password_empty {
+    return Intl.message(
+      'Please Enter A Valid Password',
+      name: 'password_empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
