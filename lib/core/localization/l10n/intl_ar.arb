@@ -1,0 +1,13 @@
+{
+    "@@locale":"ar",
+    "login":"دخول",
+    "email":"البريد الالكتروني",
+    "password":"كلمة المرور",
+    "hint_email":"اكتب بريدك الالكتروني",
+    "hint_password":"اكتب كلمة المرور",
+    "donnot_have_an_account":"ليس لديك حساب؟",
+    "sign_up":"تسجيل",
+    "register":"سجل ",
+    "app_bar_title_part_one":"الاخبار ",
+    "app_bar_title_part_two":"السحابه"
+}

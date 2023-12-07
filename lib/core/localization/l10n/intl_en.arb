@@ -1,0 +1,13 @@
+{
+    "@@locale":"en",
+    "login":"Login",
+    "email":"Email",
+    "password":"Password",
+    "hint_email":"Type Your Email",
+    "hint_password":"Enter Your Password",
+    "donnot_have_an_account":"Don't Have An Account?",
+    "sign_up":"Sign Up",
+    "register":"Register",
+    "app_bar_title_part_one":"News ",
+    "app_bar_title_part_two":"Cloud"
+}
