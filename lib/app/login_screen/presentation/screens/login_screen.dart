@@ -86,18 +86,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Please enter your email';
+                                      return context.localization.email_empty;
                                     }
                                     if (isValidEmail(value)) {
                                       value = emailController.text;
-                                      FocusScope.of(context)
-                                          .requestFocus(emailFocusNode);
+                                      // FocusScope.of(context)
+                                      //     .requestFocus(emailFocusNode);
                                       //  return null;
                                     }
                                     return null;
                                   },
                                   keyboardType: TextInputType.emailAddress,
-                                  textEditingController: emailController,
+                                  textEditingController: cubit.emailController,
                                   labelText:
                                       context.localization.email, //'Email',
                                   hintText: context.localization
@@ -131,11 +131,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                       autoFocus: true,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Please enter your password';
+                                          return context
+                                              .localization.password_empty;
                                         } else if (value.isNotEmpty) {
-                                          // FocusScope.of(context)
-                                          //     .requestFocus(passwordFocusNode);
-                                          value = passwordController.text;
+                                          FocusScope.of(context)
+                                              .requestFocus(passwordFocusNode);
+                                          value = cubitLogin
+                                              .passwordController.text;
                                         }
                                         return null;
                                       },
