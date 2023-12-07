@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -19,7 +20,6 @@ class HomeScreen extends StatelessWidget {
       )..getNews(),
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0.0,
           backgroundColor: Colors.white,
           centerTitle: true,
           title: const AppBarTitle(),
@@ -41,17 +41,11 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.grey,
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       child: Column(
                         children: [
-                          // if (cubit[index].urlToImage == null)
-                          //   SizedBox(
-                          //     height: 200.h,
-                          //     width: double.infinity,
-                          //     child: const CircularProgressIndicator.adaptive(),
-                          //   ),
                           if (cubit[index].urlToImage != null)
                             Image.network(
                               cubit[index].urlToImage!,
@@ -73,6 +67,27 @@ class HomeScreen extends StatelessWidget {
                                 TextStyle(color: Colors.red, fontSize: 18.sp),
                           ),
                         ],
+                      ).animate(
+                        autoPlay: true,
+                        effects: [
+                          const FadeEffect(
+                            curve: ElasticOutCurve(.5),
+                            duration: Duration(
+                              seconds: 4,
+                            ),
+                          ),
+                          const ScaleEffect(
+                            curve: ElasticOutCurve(.5),
+                            duration: Duration(
+                              seconds: 4,
+                            ),
+                            alignment: Alignment.center,
+                          ),
+                        ],
+                      ).fade(
+                        duration: const Duration(
+                          seconds: 4,
+                        ),
                       ),
                     ),
                   );
