@@ -10,6 +10,7 @@ import 'package:new_app/app/login_screen/presentation/widgets/custom_raw_materia
 import 'package:new_app/app/login_screen/presentation/widgets/custom_sign_up_row.dart';
 import 'package:new_app/app/login_screen/presentation/widgets/custom_text_form_field.dart';
 import 'package:new_app/app/register_screen/presentation/cubits/visiable_password/visiable_password_cubit.dart';
+import 'package:new_app/app/splash_screen/presentation/cubit/language_cubit/language_cubit.dart';
 import 'package:new_app/config/routes_names.dart';
 import 'package:new_app/core/localization/localization.dart';
 import 'package:new_app/gen/assets.gen.dart';
@@ -27,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
   bool isvalue = false;
+
   bool isValidEmail(String value) {
     // Basic email validation using regex
     const emailRegex = r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
@@ -35,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cubitLanguage = BlocProvider.of<LanguageCubit>(context);
     return BlocProvider(
       create: (context) => VisiablePasswordCubit(),
       child: Scaffold(
@@ -47,13 +50,39 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     SwitchListTile(
+                      title: Text(
+                        'Language ',
+                        style: TextStyle(color: Colors.white, fontSize: 15.sp),
+                      ),
+                      activeColor:
+                          cubitLanguage.isChanged ? Colors.red : Colors.green,
                       onChanged: (value) {
                         setState(() {
-                          isvalue = value;
-                          if (isvalue) {}
+                          cubitLanguage.changeLanguage(value);
                         });
                       },
-                      value: isvalue,
+                      value: cubitLanguage.state is LanguageScuessEn,
+                    ).animate(
+                      autoPlay: true,
+                      effects: [
+                        const FadeEffect(
+                          curve: Curves.fastEaseInToSlowEaseOut,
+                          duration: Duration(
+                            seconds: 4,
+                          ),
+                        ),
+                        const ScaleEffect(
+                          curve: Curves.fastEaseInToSlowEaseOut,
+                          duration: Duration(
+                            seconds: 4,
+                          ),
+                          alignment: Alignment.center,
+                        ),
+                      ],
+                    ).fade(
+                      duration: const Duration(
+                        seconds: 4,
+                      ),
                     ),
                     Image.asset(
                       MyAssets.images.png.llogin.path,
@@ -90,18 +119,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                     if (isValidEmail(value)) {
                                       value = emailController.text;
-                                      // FocusScope.of(context)
-                                      //     .requestFocus(emailFocusNode);
-                                      //  return null;
+                                      FocusScope.of(context)
+                                          .requestFocus(emailFocusNode);
+                                      return null;
                                     }
                                     return null;
                                   },
                                   keyboardType: TextInputType.emailAddress,
                                   textEditingController: cubit.emailController,
-                                  labelText:
-                                      context.localization.email, //'Email',
-                                  hintText: context.localization
-                                      .hint_email, //'Type your email',
+                                  labelText: context.localization.email,
+                                  hintText: context.localization.hint_email,
                                 ),
                                 SizedBox(
                                   height: 10.h,
@@ -117,35 +144,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         BlocProvider.of<LoginScreenCubit>(
                                       context,
                                     );
-                                    return CustomTextFormField(
-                                      obscureText: cubit.obscureText,
-                                      suffixIcon: IconButton(
-                                        onPressed: () =>
-                                            cubit.changeVisibility(),
-                                        icon: cubit.suffixIcon,
-                                      ),
-                                      onChanged: (value) {
-                                        cubitLogin.passwordController.text =
-                                            value ?? '';
-                                      },
-                                      autoFocus: true,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return context
-                                              .localization.password_empty;
-                                        } else if (value.isNotEmpty) {
-                                          FocusScope.of(context)
-                                              .requestFocus(passwordFocusNode);
-                                          value = cubitLogin
-                                              .passwordController.text;
-                                        }
-                                        return null;
-                                      },
-                                      textEditingController: passwordController,
-                                      labelText: context
-                                          .localization.password, //'Password',
-                                      hintText: context.localization
-                                          .hint_password, //'Enter your Password',
+                                    return CustomTextFormPassword(
+                                      cubit: cubit,
+                                      cubitLogin: cubitLogin,
+                                      passwordFocusNode: passwordFocusNode,
+                                      passwordController: passwordController,
                                     );
                                   },
                                 ),
@@ -250,6 +253,48 @@ class _LoginScreenState extends State<LoginScreen> {
         content: Text(message),
         backgroundColor: isSuccess ? Colors.green : Colors.red,
       ),
+    );
+  }
+}
+
+class CustomTextFormPassword extends StatelessWidget {
+  const CustomTextFormPassword({
+    super.key,
+    required this.cubit,
+    required this.cubitLogin,
+    required this.passwordFocusNode,
+    required this.passwordController,
+  });
+
+  final VisiablePasswordCubit cubit;
+  final LoginScreenCubit cubitLogin;
+  final FocusNode passwordFocusNode;
+  final TextEditingController passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomTextFormField(
+      obscureText: cubit.obscureText,
+      suffixIcon: IconButton(
+        onPressed: () => cubit.changeVisibility(),
+        icon: cubit.suffixIcon,
+      ),
+      onChanged: (value) {
+        cubitLogin.passwordController.text = value ?? '';
+      },
+      autoFocus: true,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return context.localization.password_empty;
+        } else if (value.isNotEmpty) {
+          FocusScope.of(context).requestFocus(passwordFocusNode);
+          value = cubitLogin.passwordController.text;
+        }
+        return null;
+      },
+      textEditingController: passwordController,
+      labelText: context.localization.password,
+      hintText: context.localization.hint_password,
     );
   }
 }
