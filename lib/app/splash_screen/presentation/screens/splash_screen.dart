@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:new_app/config/routes_names.dart';
 import 'package:new_app/gen/assets.gen.dart';
 
@@ -14,8 +15,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   _SplashScreenState() {
     Timer(
-      const Duration(seconds: 3),
-      () => context.go(AppRouteName.homeScreen),
+      const Duration(seconds: 4),
+      () => context.go(AppRouteName.loginScreen),
     );
   }
   @override
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(MyAssets.images.logo.path),
+            Lottie.asset(MyAssets.lottie.lottieLogo.path),
           ],
         ),
       ),
