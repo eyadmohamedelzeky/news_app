@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اكتب بريدك الالكتروني"),
         "hint_password":
             MessageLookupByLibrary.simpleMessage("اكتب كلمة المرور"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغه"),
         "login": MessageLookupByLibrary.simpleMessage("دخول"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "password_empty":
