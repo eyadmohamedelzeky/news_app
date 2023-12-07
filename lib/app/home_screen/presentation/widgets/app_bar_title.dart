@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_app/core/localization/localization.dart';
 
 class AppBarTitle extends StatelessWidget {
   const AppBarTitle({
@@ -7,16 +8,16 @@ class AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'News ',
-          style: TextStyle(color: Colors.black),
+          context.localization.app_bar_title_part_one,
+          style: const TextStyle(color: Colors.black),
         ),
         Text(
-          'Clould',
-          style: TextStyle(color: Colors.amber),
+          context.localization.app_bar_title_part_two,
+          style: const TextStyle(color: Colors.amber),
         ),
       ],
     );
