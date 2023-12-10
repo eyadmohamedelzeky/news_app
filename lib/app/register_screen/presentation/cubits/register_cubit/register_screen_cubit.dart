@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 part 'register_screen_state.dart';
 
 class RegisterScreenCubit extends Cubit<RegisterScreenState> {
