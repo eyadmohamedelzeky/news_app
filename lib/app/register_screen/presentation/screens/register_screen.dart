@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -152,45 +154,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () async {
                                     if (formKey.currentState!.validate()) {
                                       try {
+                                        await registerCubit.registerUser();
                                         if (state is RegisterScreenSuccess) {
-                                          registerCubit.registerUser();
                                           snack(
                                             context,
                                             isSuccess: true,
                                             message: 'Register Success',
                                           );
                                           context.go(AppRouteName.loginScreen);
-                                        } else {
+                                        } else if (state is RegisterFailure) {
                                           snack(
                                             context,
                                             isSuccess: false,
-                                            message: 'Register Failure',
+                                            message: state.messageError,
                                           );
                                         }
-                                        //await registerUser();
                                       } on FirebaseAuthException catch (e) {
                                         debugPrint('FirebaseAuthException: $e');
-
-                                        // debugPrint(
-                                        //   'The Error Coming from ${e.code}',
-                                        // );
+                                        debugPrint(
+                                          'The Error Coming from ${e.code}',
+                                        );
+                                        // if (state is RegisterFailure) {
+                                        //   return snack(
+                                        //     context,
+                                        //     isSuccess: false,
+                                        //     message:
+                                        //         '${RegisterFailure(messageError: "${e.message}")}',
+                                        //   );
+                                        // }
                                         // snack(
                                         //   context,
                                         //   isSuccess: false,
                                         //   message:
                                         //       '${RegisterFailure(messageError: "${e.message}")}',
                                         // );
-
-                                        // //  showSnackBar(context, e, e.code);
                                         // context.go(AppRouteName.loginScreen);
                                         // if (e.code != 'email-already-in-use') {
-                                        //   snack(
+                                        //   return snack(
                                         //     context,
                                         //     isSuccess: false,
                                         //     message:
                                         //         '${RegisterFailure(messageError: "${e.message}")}',
                                         //   );
-                                        // showSnackBar(context, e, e.code);
                                         // }
                                       }
                                     }
@@ -255,23 +260,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        showCloseIcon: true,
         content: Text(message),
         backgroundColor: isSuccess ? Colors.green : Colors.red,
       ),
     );
   }
 }
-//   Future<void> registerUser() async {
-//     final auth = FirebaseAuth.instance;
-//     final scaffoldMessenger = ScaffoldMessenger.of(context);
-//     final UserCredential userCredential =
-//         await auth.createUserWithEmailAndPassword(
-//       email: emailController.text,
-//       password: passwordController.text,
-//     );
-//     debugPrint(
-//       "This Email is${userCredential.user!.email}",
-//     );
-//   }
-// }
-
